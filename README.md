@@ -97,7 +97,7 @@ Contributions are welcome! Feel free to submit pull requests or open issues for 
 ## License
 RetrofitUploadKit is made available under the MIT License. For more details, see the LICENSE file in the repository.
 
-```kotlin
+
 Consider adding the following sections if relevant:
 
 - **Getting Started**: A section that guides the user through setting up and using your library for the first time.
@@ -107,4 +107,3 @@ Consider adding the following sections if relevant:
 - **Acknowledgments**: A place to thank contributors, mention inspirations, or related projects.
 
 Remember to replace placeholder text (like `YOUR_DATA_CLASS`) with the actual content or provide clear instructions on what users should replace it with based on their use case.
-```
