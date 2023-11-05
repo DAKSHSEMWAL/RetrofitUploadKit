@@ -98,3 +98,9 @@ Contributions are welcome! Feel free to submit pull requests or open issues for 
 RetrofitUploadKit is made available under the MIT License. For more details, see the LICENSE file in the repository.
 
 **Remember to replace placeholder text (like `YOUR_DATA_CLASS`) with the actual content or provide clear instructions on what users should replace it with based on their use case.**
+
+
+## SERVER
+if You don't have a server for testing you can try cloning my other repo which simulates the Server
+https://github.com/DAKSHSEMWAL/file-upload-server
+[FILE_UPLOAD_SERVER](https://github.com/DAKSHSEMWAL/file-upload-server#readme)
