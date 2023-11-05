@@ -10,8 +10,7 @@ object AndroidBuildConfig {
 
     // TODO update on every release
     private const val buildNumber = "0" // increment this for each build on the same day
-    val versionCode =
-        1
+    val versionCode = 1
     const val versionName: String = "1.0.${buildNumber}"
     const val testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 }
