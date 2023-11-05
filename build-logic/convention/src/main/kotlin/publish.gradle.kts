@@ -52,7 +52,7 @@ publishing {
             afterEvaluate {
                 artifactId = "retrofitfileuploadkit"
                 groupId = PUBLISHING_GROUP
-                version = AndroidBuildConfig.versionCode
+                version = AndroidBuildConfig.LIBRARY_VERSION_CODE
                 if (plugins.hasPlugin("com.android.library")) {
                     from(components["release"])
                 } else {
@@ -62,7 +62,7 @@ publishing {
 
             pom {
                 if (!"USE_SNAPSHOT".byProperty.isNullOrBlank()) {
-                    version = "1.0.0-SNAPSHOT"
+                    version = "$version-SNAPSHOT"
                 }
                 name.set("retrofitfileuploadkit")
                 description.set("RetrofitUploadKit is a convenient, streamlined Kotlin-based library that wraps around the Retrofit networking library, specifically tailored for simplifying file upload tasks. This kit abstracts the complex setup and configuration typically associated with making multipart HTTP requests for file uploads.")
