@@ -1,3 +1,6 @@
+# RetrofitUploadKit
+RetrofitUploadKit is a convenient, streamlined Kotlin-based library that wraps around the Retrofit networking library, specifically tailored for simplifying file upload tasks. This kit abstracts the complex setup and configuration typically associated with making multipart HTTP requests for file uploads
+
 # RetrofitFileUploadKit
 
 RetrofitFileUploadKit is a Kotlin-based Android library that simplifies the file upload process using Retrofit. It offers a flexible and easy-to-use DSL for uploading files as multipart or as byte arrays, with support for single or multiple file uploads.
@@ -18,3 +21,47 @@ Add the following to your `build.gradle` file:
 dependencies {
     implementation 'io.github.dakshsemwal:retrofitfileuploadkit:1.0.1'
 }
+```
+## Usage
+First, make sure you've initialized Hilt in your application. Then, to use RetrofitFileUploadKit, follow these steps:
+
+## Single File Upload
+
+```kotlin
+    @Provides
+    @Singleton
+    fun provideBaseUrlProvider(): BaseUrlProvider = object : BaseUrlProvider {
+        override val baseUrl: String
+            get() = "https://your.example.com" // Replace with the actual base URL
+    }
+```
+
+```kotlin
+val fileUploadManager: FileUploadManager = // Get instance via Hilt injection
+
+fileUploadManager.uploadFile(
+    url = "/projects/image",
+    file = yourFileInstance,
+    name = "file", // Optional: customize the form name
+    isMultipart = true // Optional: set to false to upload as byte array
+)
+```
+## Multiple File Upload
+```kotlin
+// Define your files and other parameters
+val files: List<File> = listOf(file1, file2, file3)
+
+// Upload files
+files.forEachIndexed { index, file ->
+    fileUploadManager.uploadFile(
+        url = "/projects/image",
+        file = file,
+        name = "file", // Optional: customize the form name
+        isMultipart = true // or false for byte array
+    )
+}
+```
+
+
+
+
