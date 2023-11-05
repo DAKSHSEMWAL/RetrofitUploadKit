@@ -27,6 +27,8 @@ First, make sure you've initialized Hilt in your application. Then, to use Retro
 
 ## Single File Upload
 
+How to provide your BASE_URL
+
 ```kotlin
     @Provides
     @Singleton
@@ -37,14 +39,24 @@ First, make sure you've initialized Hilt in your application. Then, to use Retro
 ```
 
 ```kotlin
-val fileUploadManager: FileUploadManager = // Get instance via Hilt injection
-
-fileUploadManager.uploadFile(
-    url = "/projects/image",
-    file = yourFileInstance,
-    name = "file", // Optional: customize the form name
-    isMultipart = true // Optional: set to false to upload as byte array
-)
+class FileUploadDataSourceImpl @Inject constructor(val fileUploadManager: FileUploadManager) :
+    FileUploadDataSource {
+    override suspend fun uploadFile(
+        url: String,
+        file: File,
+        name: String,
+        isMultipart: Boolean
+    ): Resource<YOUR_DATA_CLASS> {
+        val type = object : TypeToken<YOUR_DATA_CLASS>() {}.type
+        return fileUploadManager.uploadFile(
+            type = type,
+            url = url,
+            file = file,
+            name = name,
+            isMultipart = isMultipart
+        )
+    }
+}
 ```
 ## Multiple File Upload
 ```kotlin
