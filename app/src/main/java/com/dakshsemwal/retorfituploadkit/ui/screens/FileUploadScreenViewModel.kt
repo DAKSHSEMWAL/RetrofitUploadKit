@@ -18,7 +18,7 @@ class FileUploadScreenViewModel @Inject constructor(val fileUploadService: FileU
         when (event) {
             is FileUploadScreenContract.Event.OnFileSelected -> {
                 viewModelScope.launch {
-                    fileUploadService.uploadFile(file = event.uri).collectLatest {
+                    fileUploadService.uploadFile(file = event.uri, url = "upload").collectLatest {
                         setState {
                             copy(fileUploadState = it)
                         }

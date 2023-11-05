@@ -20,7 +20,7 @@ class AppModule {
     @Singleton
     fun provideBaseUrlProvider(): BaseUrlProvider = object : BaseUrlProvider {
         override val baseUrl: String
-            get() = "https://api.staging.eazyupdates.com" // Replace with the actual base URL
+            get() = "http://192.168.0.206:8080" // Replace with the actual base URL
     }
 
     @Singleton

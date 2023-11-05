@@ -14,7 +14,12 @@ class FileUploadServiceImpl @Inject constructor(val fileUploadDataSource: FileUp
         isMultipart: Boolean
     ) = flow {
         emit(FileUploadState.Uploading)
-        fileUploadDataSource.uploadFile(file = file).also {
+        fileUploadDataSource.uploadFile(
+            file = file,
+            url = url,
+            name = name,
+            isMultipart = isMultipart
+        ).also {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     emit(FileUploadState.Uploaded(url = it.data?.data?.imageUpload?.originalImgURL))
