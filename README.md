@@ -97,13 +97,4 @@ Contributions are welcome! Feel free to submit pull requests or open issues for 
 ## License
 RetrofitUploadKit is made available under the MIT License. For more details, see the LICENSE file in the repository.
 
-
-Consider adding the following sections if relevant:
-
-- **Getting Started**: A section that guides the user through setting up and using your library for the first time.
-- **Documentation**: A link to the full documentation if available.
-- **Examples**: Specific examples of common tasks that can be accomplished using your library.
-- **Support and Contact**: Information on where and how users can seek help, report issues, or get updates.
-- **Acknowledgments**: A place to thank contributors, mention inspirations, or related projects.
-
-Remember to replace placeholder text (like `YOUR_DATA_CLASS`) with the actual content or provide clear instructions on what users should replace it with based on their use case.
+**Remember to replace placeholder text (like `YOUR_DATA_CLASS`) with the actual content or provide clear instructions on what users should replace it with based on their use case.**
