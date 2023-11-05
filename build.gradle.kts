@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.kapt) apply false
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.ktlint) apply true
+    alias(libs.plugins.maven) apply true
 }
 
 subprojects {
