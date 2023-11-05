@@ -1,8 +1,6 @@
-import com.android.build.gradle.LibraryExtension
+
 import com.dakshsemwal.AndroidBuildConfig
 import com.dakshsemwal.PUBLISHING_GROUP
-import org.gradle.api.tasks.bundling.Jar
-import org.gradle.internal.impldep.org.bouncycastle.cms.RecipientId.password
 
 /**
  * Precompiled script plugin from:
@@ -67,7 +65,7 @@ publishing {
                     version = "$version-SNAPSHOT"
                 }
                 name.set("retrofitfileuploadkit")
-                description.set("MDParserKit Core is a library that provides the functionality to parse markdown text and convert it into an AnnotatedString with appropriate styles.")
+                description.set("RetrofitUploadKit is a convenient, streamlined Kotlin-based library that wraps around the Retrofit networking library, specifically tailored for simplifying file upload tasks. This kit abstracts the complex setup and configuration typically associated with making multipart HTTP requests for file uploads.")
                 url.set("https://github.com/DAKSHSEMWAL/RetrofitUploadKit")
 
                 licenses {
