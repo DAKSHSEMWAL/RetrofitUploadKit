@@ -53,7 +53,7 @@ import kotlinx.coroutines.launch
 import java.io.File
 
 @Composable
-fun CreateOrganizationForm() {
+fun FileUploadScreen() {
     val viewModel = hiltViewModel<FileUploadScreenViewModel>()
     val state = viewModel.viewState.value
     val event: (FileUploadScreenContract.Event) -> Unit = { viewModel.setEvent(it) }
@@ -232,11 +232,11 @@ fun CreateOrganizationForm() {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun CreateOrganizationFormPreviewLight() {
-    RetrofitUploadKitTheme { CreateOrganizationForm() }
+    RetrofitUploadKitTheme { FileUploadScreen() }
 }
 
 @Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun CreateOrganizationFormPreviewDark() {
-    RetrofitUploadKitTheme { CreateOrganizationForm() }
+    RetrofitUploadKitTheme { FileUploadScreen() }
 }

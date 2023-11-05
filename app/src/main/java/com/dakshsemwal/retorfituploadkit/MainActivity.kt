@@ -9,7 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.dakshsemwal.retorfituploadkit.ui.screens.CreateOrganizationForm
+import com.dakshsemwal.retorfituploadkit.ui.screens.FileUploadScreen
 import com.dakshsemwal.retorfituploadkit.ui.theme.RetrofitUploadKitTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    CreateOrganizationForm()
+                    FileUploadScreen()
                 }
             }
         }
@@ -36,6 +36,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     RetrofitUploadKitTheme {
-        CreateOrganizationForm()
+        FileUploadScreen()
     }
 }
