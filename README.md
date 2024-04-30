@@ -1,5 +1,7 @@
 # RetrofitUploadKit
-[![Publish Release](https://github.com/DAKSHSEMWAL/RetrofitUploadKit/actions/workflows/publish-release.yaml/badge.svg?event=release)]([https://github.com/DAKSHSEMWAL/RetrofitUploadKit/actions/workflows/publish-release.yaml](https://github.com/DAKSHSEMWAL/RetrofitUploadKit/releases)
+![Maven Central](https://img.shields.io/maven-central/v/io.github.dakshsemwal/retrofitfileuploadkit.svg) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/DAKSHSEMWAL/RetrofitUploadKit.svg?sort=semver)](https://github.com/DAKSHSEMWAL/RetrofitUploadKit/releases)
+
+
 
 RetrofitUploadKit is a Kotlin-based library that simplifies the file upload process using Retrofit.
 This library provides a flexible DSL for uploading files as multipart or byte arrays and is designed
