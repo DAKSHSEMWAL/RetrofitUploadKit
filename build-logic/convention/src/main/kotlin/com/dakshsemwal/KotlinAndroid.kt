@@ -15,7 +15,7 @@ internal fun Project.configureKotlinAndroid(
         defaultConfig {
             minSdk = AndroidBuildConfig.minSdkVersion
             buildFeatures.buildConfig = true
-            testInstrumentationRunner = testInstrumentationRunner
+            testInstrumentationRunner = AndroidBuildConfig.testInstrumentationRunner
         }
 
         compileOptions {
