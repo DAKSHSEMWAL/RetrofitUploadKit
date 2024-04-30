@@ -1,4 +1,5 @@
 # RetrofitUploadKit
+[![Publish Release](https://github.com/DAKSHSEMWAL/RetrofitUploadKit/actions/workflows/publish-release.yaml/badge.svg)](https://github.com/DAKSHSEMWAL/RetrofitUploadKit/actions/workflows/publish-release.yaml)
 
 RetrofitUploadKit is a Kotlin-based library that simplifies the file upload process using Retrofit.
 This library provides a flexible DSL for uploading files as multipart or byte arrays and is designed
