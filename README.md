@@ -23,7 +23,7 @@ file:
 
 ```groovy
 dependencies {
-    implementation 'io.github.dakshsemwal:retrofitfileuploadkit:1.0.1'
+    implementation 'io.github.dakshsemwal:retrofitfileuploadkit:1.0.2'
 }
 ```
 
