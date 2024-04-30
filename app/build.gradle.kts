@@ -1,4 +1,3 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     id("retrofitfileuploadkit.android.application")
     id("retrofitfileuploadkit.android.application.compose")
@@ -18,25 +17,6 @@ android {
         freeCompilerArgs += "-Xextended-compiler-checks"
     }
 
-
-    buildTypes {
-        release {
-            manifestPlaceholders["crashlyticsEnabled"] = true
-            buildConfigField("String", "host", "\"https://api.eazyupdates.com\"")
-            // Enables code shrinking, obfuscation, and optimization for only your project's release build type. Make sure to use a build variant with `isDebuggable=false`.
-            isShrinkResources = true
-            isMinifyEnabled = true
-            // Includes the default ProGuard rules files that are packaged with the Android Gradle plugin.
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-        debug {
-            manifestPlaceholders["crashlyticsEnabled"] = true
-            buildConfigField("String", "host", "\"https://api.staging.eazyupdates.com\"")
-        }
-    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -66,6 +46,8 @@ dependencies {
     implementation(libs.hilt.android.core)
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigationCompose)
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.ui)
     kapt(libs.androidx.hilt.compiler)
     kapt(libs.hilt.android.compiler)
 

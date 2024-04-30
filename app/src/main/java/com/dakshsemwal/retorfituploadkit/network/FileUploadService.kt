@@ -8,6 +8,7 @@ interface FileUploadService {
         url: String = "/projects/image",
         file: File,
         name: String = "imageUpload",
-        isMultipart: Boolean = true
+        isMultipart: Boolean = true,
+        isVideo:Boolean = false
     ): Flow<FileUploadState>
 }

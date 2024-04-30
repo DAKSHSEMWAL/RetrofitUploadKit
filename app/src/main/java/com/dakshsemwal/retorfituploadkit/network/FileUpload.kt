@@ -8,6 +8,7 @@ sealed class FileUpload {
     )
 }
 
+
 data class ResizedUrls(
 
     @SerializedName("s1024") var s1024: ArrayList<String> = arrayListOf(),

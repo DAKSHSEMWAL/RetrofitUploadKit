@@ -13,5 +13,5 @@ object AndroidBuildConfig {
     val versionCode = 1
     const val versionName: String = "1.0.${buildNumber}"
     const val testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    const val LIBRARY_VERSION_CODE = "1.0.1"
+    const val LIBRARY_VERSION_CODE = "1.0.2"
 }

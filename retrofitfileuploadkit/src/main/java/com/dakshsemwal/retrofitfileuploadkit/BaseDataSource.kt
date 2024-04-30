@@ -32,6 +32,7 @@ internal abstract class BaseDataSource {
                     return Resource.success(result)
                 }
             }
+            Log.e("Error","$response")
             return error("No body in response", 204) // Or appropriate error handling
         } catch (e: HttpException) {
             return error(e.localizedMessage ?: "Network error", e.code())

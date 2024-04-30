@@ -8,6 +8,12 @@ interface FileUploadDataSource {
         url: String = "/projects/image",
         file: File,
         name: String = "imageUpload",
-        isMultipart: Boolean = true
+        isMultipart: Boolean = true,
     ): Resource<FileUpload.Response>
+    suspend fun uploadVideo(
+        url: String = "/projects/video",
+        file: File,
+        name: String = "videoUpload",
+        isMultipart: Boolean = true,
+    ): Resource<VideoUploadResponse>
 }

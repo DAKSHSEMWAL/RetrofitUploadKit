@@ -43,7 +43,6 @@ interface FileUploadApi {
      * This method is typically used for uploading a file without any additional data.
      * The file's binary content is sent as a raw byte array encapsulated in a [RequestBody].
      *
-     * @param T The expected type of the response body if the upload is successful.
      * @param url The endpoint URL where the file should be uploaded.
      * @param file The request body containing the file's binary content.
      * @return A [Response] object containing either the successful result of type [T] or an error.

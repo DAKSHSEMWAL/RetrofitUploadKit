@@ -23,4 +23,20 @@ class FileUploadDataSourceImpl @Inject constructor(val fileUploadManager: FileUp
             isMultipart = isMultipart
         )
     }
+
+    override suspend fun uploadVideo(
+        url: String,
+        file: File,
+        name: String,
+        isMultipart: Boolean
+    ): Resource<VideoUploadResponse> {
+        val type = object : TypeToken<VideoUploadResponse>() {}.type
+        return fileUploadManager.uploadFile(
+            type = type,
+            url = url,
+            file = file,
+            name = name,
+            isMultipart = isMultipart
+        )
+    }
 }

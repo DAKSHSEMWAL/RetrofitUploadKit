@@ -8,7 +8,7 @@ import java.io.File
 
 class FileUploadScreenContract {
     sealed class Event : ViewEvent {
-        data class OnFileSelected(val uri: File) : Event()
+        data class OnFileSelected(val uri: File, val value: Boolean) : Event()
     }
 
     data class State(

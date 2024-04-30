@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FileUploadScreenViewModel @Inject constructor(val fileUploadService: FileUploadService) :
+class FileUploadScreenViewModel @Inject constructor(private val fileUploadService: FileUploadService) :
     ContractViewModel<FileUploadScreenContract.Event, FileUploadScreenContract.State, FileUploadScreenContract.Effect>() {
     override fun setInitialState(): FileUploadScreenContract.State =
         FileUploadScreenContract.State()
@@ -18,7 +18,11 @@ class FileUploadScreenViewModel @Inject constructor(val fileUploadService: FileU
         when (event) {
             is FileUploadScreenContract.Event.OnFileSelected -> {
                 viewModelScope.launch {
-                    fileUploadService.uploadFile(file = event.uri, url = "upload").collectLatest {
+                    fileUploadService.uploadFile(
+                        file = event.uri,
+                        url = "upload",
+                        isVideo = event.value
+                    ).collectLatest {
                         setState {
                             copy(fileUploadState = it)
                         }

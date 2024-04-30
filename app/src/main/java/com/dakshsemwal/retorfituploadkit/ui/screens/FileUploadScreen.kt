@@ -6,6 +6,7 @@ import android.webkit.MimeTypeMap
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.OptIn
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -27,6 +28,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -42,7 +44,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.media3.common.MediaItem
+import androidx.media3.common.MimeTypes.isVideo
+import androidx.media3.common.util.UnstableApi
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.ui.PlayerView
 import com.dakshsemwal.retorfituploadkit.network.FileUploadState
 import com.dakshsemwal.retorfituploadkit.ui.theme.RetrofitUploadKitTheme
 import com.dakshsemwal.retorfituploadkit.util.inputStreamToFile
@@ -52,6 +60,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.File
 
+@OptIn(UnstableApi::class)
 @Composable
 fun FileUploadScreen() {
     val viewModel = hiltViewModel<FileUploadScreenViewModel>()
@@ -61,13 +70,17 @@ fun FileUploadScreen() {
     var currentProgress by remember { mutableFloatStateOf(0f) }
     val scope = rememberCoroutineScope()
     val launchTimer = remember { mutableStateOf(false) }
+    val isVideo = remember {
+        mutableStateOf(false)
+    }
     val context = LocalContext.current
-    val launcher =
+    val mediaLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             photoUri = uri
             if (uri != null) {
                 val contentResolver = context.contentResolver
                 val mimeType = contentResolver.getType(uri)
+                isVideo.value = isVideo(mimeType)
                 val extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType)
 
                 // Get an input stream from the content resolver using the Uri
@@ -84,7 +97,7 @@ fun FileUploadScreen() {
                     inputStream?.let { stream ->
                         inputStreamToFile(stream, file)
                         // Now that you have a File object, you can pass it along
-                        event(FileUploadScreenContract.Event.OnFileSelected(file))
+                        event(FileUploadScreenContract.Event.OnFileSelected(file,isVideo.value))
                     }
                 }
             }
@@ -127,14 +140,20 @@ fun FileUploadScreen() {
                         modifier = Modifier
                             .fillMaxWidth()
                     ) {
-                        GlideImage(
-                            imageModel = { photoUri }, // The URI you want to load the image from.
-                            // fadeIn is true by default
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .height(200.dp)
-                                .clip(RoundedCornerShape(4.dp))
-                        )
+                        if (isVideo.value) {
+                            photoUri?.let {
+                                VideoPlayer(videoUri = it) // Implement a Composable that uses Android's VideoView or a third-party library
+                            }
+                        } else {
+                            GlideImage(
+                                imageModel = { photoUri }, // The URI you want to load the image from.
+                                // fadeIn is true by default
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .height(200.dp)
+                                    .clip(RoundedCornerShape(4.dp))
+                            )
+                        }
                         IconButton(
                             onClick = { photoUri = null },
                             modifier = Modifier
@@ -149,9 +168,9 @@ fun FileUploadScreen() {
                         is FileUploadState.Uploading -> {
                             launchTimer.value = true
                             LinearProgressIndicator(
+                                progress = { currentProgress },
                                 modifier = Modifier
                                     .fillMaxWidth(),
-                                progress = currentProgress,
                             )
                         }
 
@@ -179,6 +198,8 @@ fun FileUploadScreen() {
 
                         is FileUploadState.Undefined ->
                             launchTimer.value = false
+
+                        else -> Unit
                     }
                 }
             } else {
@@ -194,12 +215,12 @@ fun FileUploadScreen() {
                             shape = RoundedCornerShape(4.dp)
                         )
                         .clickable {
-                            launcher.launch(
+                            mediaLauncher.launch(
                                 PickVisualMediaRequest(
                                     //Here we request only photos. Change this to .ImageAndVideo if
                                     //you want videos too.
                                     //Or use .VideoOnly if you only want videos.
-                                    mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly
+                                    mediaType = ActivityResultContracts.PickVisualMedia.ImageAndVideo
                                 )
                             )
                         }
@@ -220,14 +241,42 @@ fun FileUploadScreen() {
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-
             Spacer(modifier = Modifier.height(24.dp))
 
         }
     }
 }
+
+@Composable
+fun VideoPlayer(videoUri: Uri) {
+    val context = LocalContext.current
+    val exoPlayer = remember {
+        ExoPlayer.Builder(context).build().apply {
+            val mediaItem = MediaItem.fromUri(videoUri)
+            setMediaItem(mediaItem)
+            prepare()
+        }
+    }
+
+    DisposableEffect(key1 = exoPlayer) {
+        onDispose {
+            exoPlayer.release()
+        }
+    }
+
+    AndroidView(
+        factory = { ctx ->
+            PlayerView(ctx).apply {
+                player = exoPlayer
+                useController = true
+            }
+        },
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(200.dp)
+    )
+}
+
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
